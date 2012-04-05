@@ -22,6 +22,16 @@
 		</td>
 	</tr>
 	<tr>
+		<td class="bold ta-right">Default Currency</td>
+		<td>
+			<select name="currency">
+<?php foreach ($this->currencies as $currency) { ?>
+				<option value="<?php echo $currency['iso_code'] ?>"><?php echo $currency['name']?></option>
+<?php } ?>
+			</select>
+		</td>
+	</tr>
+	<tr>
 		<td class="bold ta-right">Phone</td>
 		<td><input type="text" name="phone" style="width:200px;" />
 	</tr>

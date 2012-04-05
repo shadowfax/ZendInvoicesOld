@@ -3,7 +3,11 @@ class SettingsController extends Zend_Controller_Action
 {
 	public function companyAction()
 	{
-		$this->view->countries = ZendInvoices_Db_Table_Countries::getCountriesForSelect();
+		$country_table = new ZendInvoices_Db_Table_Countries();
+		$currency_table = new ZendInvoices_Db_Table_Currencies();
+		
+		$this->view->countries = $country_table->getCountryList();
+		$this->view->currencies = $currency_table->getCurrencyList();
 		
 		$request = $this->getRequest();
         if ($request->isPost()) {

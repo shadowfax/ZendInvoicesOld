@@ -1,0 +1,48 @@
+<table>
+	<tr>
+		<td class="bold ta-right">Company Name</td>
+		<td><input type="text" name="name" style="width:200px;" /></td>
+	</tr>
+	<tr>
+		<td class="bold ta-right">Vat Number</td>
+		<td><input type="text" name="vat_number" style="width:200px;" /></td>
+	</tr>
+	<tr>
+		<td class="bold ta-right">Address</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td class="bold ta-right">Country</td>
+		<td>
+			<select name="country_code">
+<?php foreach ($this->countries as $country) { ?>
+				<option value="<?php echo $country['iso1_code'] ?>"><?php echo $country['name']?></option>
+<?php } ?>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td class="bold ta-right">Phone</td>
+		<td><input type="text" name="phone" style="width:200px;" />
+	</tr>
+	<tr>
+		<td class="bold ta-right">Mobile</td>
+		<td><input type="text" name="mobile" style="width:200px;" />
+	</tr>
+	<tr>
+		<td class="bold ta-right">Fax</td>
+		<td><input type="text" name="fax" style="width:200px;" />
+	</tr>
+	<tr>
+		<td class="bold ta-right">Email</td>
+		<td><input type="text" name="email" style="width:200px;" />
+	</tr>
+	<tr>
+		<td class="bold ta-right">Homepage</td>
+		<td><input type="text" name="homepage" style="width:200px;" />
+	</tr>
+	<tr>
+		<td class="bold ta-right">Logo</td>
+		<td><input type="text" name="logo" style="width:200px;" />
+	</tr>
+</table>

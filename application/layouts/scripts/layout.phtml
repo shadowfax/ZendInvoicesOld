@@ -2,10 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <?php echo $this->headMeta() ?>
+  
   <title>Zend Invoices</title>
   <link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/css/global.css" type="text/css" media="all" />
-  
   <?php echo $this->headLink() ?>
+  <script type="text/javascript" src="<?php echo $this->baseUrl("/js/jquery-1.7.2.min.js") ?>"></script>
+  <?php echo $this->headScript() ?> 
+  <?php echo $this->headStyle() ?>
 </head>
 
 <body>

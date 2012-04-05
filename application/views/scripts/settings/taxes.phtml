@@ -1,0 +1,26 @@
+<form method="post">
+<table id="taxes-table">
+	<tr class="table-header">
+		<td>Description</td>
+		<td>Amount</td>
+		<!-- Recargo de equivalencia -->
+		<td>Amount 2</td>
+		<td></td>
+	</tr>
+	<?php foreach($this->taxes as $tax) {?>
+	<tr>
+		<td>
+			<input type="hidden" name="tax_id[]" value="<?php echo $tax['id'] ?>" />
+			<input type="text" name="description[]" size="30" value="<?php echo $tax['description'] ?>" />
+		</td>
+		<td><input type="text" name="amount1[]" size="4" value="<?php echo $tax['amount'] ?>" /></td>
+		<!-- Recargo de equivalencia -->
+		<td><input type="text" name="amount2[]" size="4" value="<?php echo $tax['amount_2'] ?>" /></td>
+		<td><a href="#" class="delete-link"><img src="<?php echo $this->baseUrl() ?>/images/icons/x-delete-icon.png" border="0" alt="Delete" /></a></td>
+	</tr>
+	<?php } ?>
+</table>
+<a href="#" class="add-link">Add new tax</a>
+
+<input type="submit" value="Save" />
+</form>

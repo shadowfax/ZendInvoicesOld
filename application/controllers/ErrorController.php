@@ -2,7 +2,13 @@
 
 class ErrorController extends Zend_Controller_Action
 {
-
+	public function init()
+	{
+		if (!Zend_Auth::getInstance()->hasIdentity()) {
+			$this->_helper->layout->disableLayout();
+		}
+	}
+	
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');

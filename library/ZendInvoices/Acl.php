@@ -5,58 +5,53 @@ class ZendInvoices_Acl extends Zend_Acl
 	{
 		$this->_initResources();
 		$this->_initRoles();
-		$this->_initRights();
+		$this->_initPermissions();
  
-		//Zend_Registry permet de gérer une collection de valeurs qui
-		//sont peuvent être accessibles n'importe où dans notre application
-		//ont peut comparer son fonctionnement à une variable globale
+		// We add the ACL to the Zend_Registry which allows us to use
+		// this variable across the whole application as if it was 
+		// defined globally
 		Zend_Registry::set('Zend_Acl', $this);
 	}
 	
+	/**
+	 * Initialize ACL resources
+	 */
 	protected function _initResources()
 	{
-		//création des ressources
-		//une ressource correspond à un élément pour lequel l'accès est contrôlé
-		//ici, nous créons une ressource par contrôleur, ce qui signifie
-		//que nous allons contrôler l'accès à nos contrôleurs
-		//la méthode addRessource() permet d'ajouter les ressources à l'ACL
 		$this->addResource(new Zend_Acl_Resource('index'));
 		$this->addResource(new Zend_Acl_Resource('error'));
 		$this->addResource(new Zend_Acl_Resource('auth'));
 	}
 	
+	/**
+	 * Initialize ACL roles
+	 */
 	protected function _initRoles()
 	{
-		//création des rôles
-		//un rôle est un objet qui demande l'accès aux ressources
-		//nous allons, ici, utiliser 3 rôles:
-		//  - guest: compte invité avec des droits limités
-		//  - reader: simple accès en lecture
-		//  - admin: accès total au site (lecture écriture
 		$guest = new Zend_Acl_Role('guest');
 		$reader = new Zend_Acl_Role('reader');
 		$user = new Zend_Acl_Role('user');
 		$admin = new Zend_Acl_Role('administrator');
  
-		//ajout des rôles à l'ACL avec la méthode addRole()
-		//le premier argument est le rôle à ajouter à l'ACL
-		//le second argument permet d'indiquer l'héritage du groupe parent
-		//reader va hériter des droits de guest
-		//admin va hériter des droits de reader
+		// bind the roles to the ACL using the method addRole()
+		// The first argument defines the role
+		// The second argument defines heritage; that is the role will inherit permission from another role
 		$this->addRole($guest);
 		$this->addRole($reader, $guest);
 		$this->addRole($user, $reader);
 		$this->addRole($admin, $user);
 	}
 	
-	protected function _initRights()
+	/**
+	 * Initialize ACL permissions
+	 */
+	protected function _initPermissions()
 	{
-		//définition des règles
-		//la méthode allow permet d'indiquer les permissions de chaque rôle
-		//le premier argument permet de définir le rôl pour qui la régle est écrite
-		//le second argument permet d'indiquer les contrôleurs
-		//le troisième indique les actions du contrôleur
-		//à noter qu'il aussi possible de refuser un accès grâce à la fonction deny()
+		// The allow method allows to set the permissions for each role.
+		// The first argument defines the role.
+		// The second argument defines de controller
+		// The third argument (Optional) defines the action
+		// NOTE: We could also use deny() in the same way to explictly deny access.
 		$this->allow('guest', array('error', 'auth'));
 		$this->allow('reader', 'index');
 		$this->allow('user');

@@ -1,0 +1,42 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Zend Invoices</title>
+  <link rel="stylesheet" href="<?php echo $this->baseUrl() ?>/css/global.css" type="text/css" media="all" />
+  
+  <?php echo $this->headLink() ?>
+</head>
+
+<body>
+<div id="top-most-header">
+	<div class="container">
+		<ul id="top-most-header-menu">
+			<li><a href="#">My Account</a></li>
+			<li><img src="<?php echo $this->baseUrl() ?>/images/top_header_separator.png" /></li>
+			<li><a href="#">Settings</a></li>
+			<li><img src="<?php echo $this->baseUrl() ?>/images/top_header_separator.png" /></li>
+			<li><a href="<?php echo $this->url(
+            	array('controller'=>'auth', 'action' => 'logout')
+            ); ?>">Logout</a></li>
+		</ul>
+		<div class="clearb"></div>
+	</div>
+</div>
+<div id="nav-header">
+	<div class="container">
+		<ul id="nav-menu">
+			<li><a href="#">Invoices</a></li>
+			<li><a href="#">People</a></li>
+		</ul>
+	</div>
+	<div class="clearb"></div>
+</div>
+<div id="content">
+	<div class="container">
+	<?php echo $this->layout()->content ?>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,5 +1,7 @@
 <div class="ta-center bottom-pad-10px">
-	<a href="#" class="gradient button-green">Add Customer</a>
+	<a href="<?php echo $this->url(
+            	array('controller'=>'customers', 'action' => 'add')
+            ); ?>" class="gradient button-green">Add Customer</a>
 </div>
 <table class="list">
 	<thead>

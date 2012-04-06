@@ -27,6 +27,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view = $this->getResource('view');
         $view->doctype('XHTML1_STRICT');
    		$view->headMeta()->appendHttpEquiv('Content-Type','text/html; charset=UTF-8');
+   		$view->setEncoding('UTF-8');
     }
 
 }

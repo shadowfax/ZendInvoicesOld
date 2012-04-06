@@ -17,7 +17,9 @@
 		<ul id="top-most-header-menu">
 			<li><a href="#">My Account</a></li>
 			<li><img src="<?php echo $this->baseUrl() ?>/images/top_header_separator.png" /></li>
-			<li><a href="#">Settings</a></li>
+			<li><a href="<?php echo $this->url(
+            	array('controller'=>'settings', 'action' => 'index')
+            ); ?>">Settings</a></li>
 			<li><img src="<?php echo $this->baseUrl() ?>/images/top_header_separator.png" /></li>
 			<li><a href="<?php echo $this->url(
             	array('controller'=>'auth', 'action' => 'logout')

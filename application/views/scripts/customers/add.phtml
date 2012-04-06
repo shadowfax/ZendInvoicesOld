@@ -1,0 +1,97 @@
+<form method="post">
+	<table>
+		<tr>
+			<td class="bold ta-right">Customer Name</td>
+			<td><input type="text" name="name" style="width:200px;" /></td>
+		</tr>
+		<tr>
+			<td class="bold ta-right bottom-pad-10px">Trademark</td>
+			<td><input type="text" name="trademark" style="width:200px;" /></td>
+		</tr>
+		<tr>
+			<td class="bold ta-right bottom-pad-10px;">Vat Number</td>
+			<td><input type="text" name="vat_number" style="width:200px;" /></td>
+		</tr>
+		<tr>
+			<td class="bold ta-right">Address</td>
+			<td>
+				<div class="bottom-pad-10px">
+					<input type="text" name="street1" style="width:320px;" /><br />
+					<span class="example">Street 1</span>
+				</div>
+				<div class="bottom-pad-10px">
+					<input type="text" name="street2" style="width:320px;" /><br />
+					<span class="example">Street 2</span>
+				</div>
+				<div class="bottom-pad-10px">
+					<table>
+						<tr>
+							<td>
+								<input type="text" name="city" style="width:100px;" /><br />
+								<span class="example">City</span>
+							</td>
+							<td>
+								<input type="text" name="state" style="width:115px;" /><br />
+								<span class="example">State</span>
+							</td>
+							<td>
+								<input type="text" name="zip" style="width:85px" /><br />
+								<span class="example">ZIP / Postal Code</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="bold ta-right">Country</td>
+			<td>
+				<select name="country_code">
+	<?php foreach ($this->countries as $country) { ?>
+					<option value="<?php echo $country['iso1_code'] ?>"><?php echo $country['name']?></option>
+	<?php } ?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="bold ta-right">Default Currency</td>
+			<td>
+				<select name="currency">
+<?php foreach ($this->currencies as $currency) { ?>
+					<option value="<?php echo $currency['iso_code'] ?>"><?php echo $currency['name']?></option>
+<?php } ?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="bold ta-right">Payment Method</td>
+			<td>
+				<select name="payment_type">
+<?php foreach ($this->payment_types as $payment_type) { ?>
+					<option value="<?php echo $payment_type['id'] ?>"><?php echo $payment_type['description']?></option>
+<?php } ?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="bold ta-right">Phone</td>
+			<td><input type="text" name="phone" style="width:200px;" />
+		</tr>
+		<tr>
+			<td class="bold ta-right">Mobile</td>
+			<td><input type="text" name="mobile" style="width:200px;" />
+		</tr>
+		<tr>
+			<td class="bold ta-right">Fax</td>
+			<td><input type="text" name="fax" style="width:200px;" />
+		</tr>
+		<tr>
+			<td class="bold ta-right">Email</td>
+			<td><input type="text" name="email" style="width:200px;" />
+		</tr>
+		<tr>
+			<td class="bold ta-right"></td>
+			<td><input type="submit" name="submit" class="gradient button-green" style="min-width:120px;" value="Save" />
+		</tr>
+	</table>
+</form>

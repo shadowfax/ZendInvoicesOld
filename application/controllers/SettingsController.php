@@ -1,6 +1,11 @@
 <?php
 class SettingsController extends Zend_Controller_Action
 {
+	public function indexAction()
+	{
+		// Displays the icon panel for settings
+	}
+	
 	public function companyAction()
 	{
 		$country_table = new ZendInvoices_Db_Table_Countries();

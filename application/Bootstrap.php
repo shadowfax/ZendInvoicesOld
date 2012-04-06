@@ -29,6 +29,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
    		$view->headMeta()->appendHttpEquiv('Content-Type','text/html; charset=UTF-8');
    		$view->setEncoding('UTF-8');
     }
-
+    
+	// ToDo: http://blog.jebrini.net/post/1431025228/url-routing-in-zend-framework-for-dummies
 }
 

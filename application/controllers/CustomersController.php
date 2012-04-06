@@ -3,6 +3,13 @@ class CustomersController extends Zend_Controller_Action
 {
 	public function indexAction()
 	{
+		$customers_table = new ZendInvoices_Db_Table_Customers();
+		
+		$paginator = $customers_table->getPaginator();
+		$paginator->setItemCountPerPage(20);
+		$paginator->setCurrentPageNumber($this->_getParam('page'));
+		
+		$this->view->paginator = $paginator;
 	}
 	
 	public function addAction()

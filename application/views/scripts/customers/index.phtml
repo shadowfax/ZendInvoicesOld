@@ -3,6 +3,7 @@
             	array('controller'=>'customers', 'action' => 'add')
             ); ?>" class="gradient button-green">Add Customer</a>
 </div>
+<?php if (count($this->paginator)) { ?>
 <table class="list">
 	<thead>
 		<tr>
@@ -15,36 +16,21 @@
 		</tr>
 	</thead>
 	<tbody>
+<?php foreach ($this->paginator as $customer){ ?>
 		<tr>
 			<td style="width:24px;"><input type="checkbox" name="select-0" /></td>
-			<td><a href="#">Microsoft</a></td>
-			<td><a href="#">66666666Z</a></td>
-			<td class="ta-right"><a href="#">100 &euro;</a></td>
+			<td><a href="#"><?php echo $customer['name'] ?></a></td>
+			<td><a href="#"><?php echo $customer['vat_number'] ?></a></td>
+			<td class="ta-right"><a href="#"><?php echo $customer['owing'] ?></a></td>
 			<td class="ta-right"><a href="#">1,000.00 &euro;</a></td>
 			<td><a href="#" class="link-invoices">Invoices</a></td>
 		</tr>
-		<tr>
-			<td style="width:24px;"><input type="checkbox" name="select-0" /></td>
-			<td><a href="#">Apple Corp.</a></td>
-			<td><a href="#">11111111A</a></td>
-			<td class="ta-right"><a href="#">50 &euro;</a></td>
-			<td class="ta-right"><a href="#">5,000.00 &euro;</a></td>
-			<td><a href="#" class="link-invoices">Invoices</a></td>
-		</tr>
+<?php } ?>
 	</tbody>
 </table>
-<div class="list-nav">
-	<a href="#">First</a>
-	<span class="separator">|</span>
-	<a href="#">Prev</a>
-	<span class="separator">|</span>
-	Page 1 / 1
-	<span class="separator">|</span>
-	<a href="#">Next</a>
-	<span class="separator">|</span>
-	<a href="#">Last</a>
-	<span class="separator">|</span>
-	go to
-	<input type="text" name="page" style="width:32px;" />
-	<input type="submit" value="Go" />
-</div>
+<?php } ?>
+
+<?php echo $this->paginationControl($this->paginator,
+                                    'Sliding',
+                                    'pagination_control.phtml'); ?>
+                                    

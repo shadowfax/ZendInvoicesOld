@@ -1,0 +1,29 @@
+<div class="list-nav">
+<?php if (isset($this->previous)){ ?>
+	<a href="<?php echo $this->url(array('page' => $this->first)); ?>">First</a>
+	<span class="separator">|</span>	
+	<a href="<?php echo $this->url(array('page' => $this->previous)); ?>">Prev</a>
+<?php } else { ?>
+	<span class="disabled-link">First</span>
+	<span class="separator">|</span>
+	<span class="disabled-link">Prev</span>
+<?php } ?>
+	<span class="separator">|</span>
+	Page <?php echo $this->current; ?> / <?php echo $this->last; ?>
+	<span class="separator">|</span>
+<?php if (isset($this->next)){ ?>
+	<a href="<?php echo $this->url(array('page' => $this->next)); ?>">Next</a>
+	<span class="separator">|</span>
+	<a href="<?php echo $this->url(array('page' => $this->last)); ?>">Last</a>
+<?php } else {?>
+	<span class="disabled-link">Next</span>
+	<span class="separator">|</span>
+	<span class="disabled-link">Last</span>
+<?php } ?>
+	<span class="separator">|</span>
+	go to
+	<form action="<?php echo $this->url(array('controller' => 'customers', 'action' => 'index', 'page' => NULL)); ?>" method="post" style="display:inline;">
+	<input type="text" name="page" style="width:32px;" />
+	<input type="submit" value="Go" />
+	</form>
+</div>

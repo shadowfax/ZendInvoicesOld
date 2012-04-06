@@ -53,6 +53,7 @@ table.list tbody tr:hover {background-color: #e7ecff;cursor:hand;cursor:pointer;
 table.list tbody a {display:block;height:32px;line-height:32px; text-decoration:none; color:#333; padding-left:4px;padding-right:4px;}
 div.list-nav {text-align:center;font-size:12px; padding-top:8px;padding:bottom:8px;}
 div.list-nav a {text-decoration:none;color:#da4722;}
+div.list-nav span.disabled-link {color:#da4722;}
 div.list-nav span.separator {color:#898989;}
 div.list-nav {color:#333;}
 

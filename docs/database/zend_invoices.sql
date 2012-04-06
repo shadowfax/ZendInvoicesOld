@@ -2,10 +2,10 @@
 -- version 3.4.10.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 05-04-2012 a las 18:19:56
--- Versión del servidor: 5.1.36
--- Versión de PHP: 5.3.0
+-- Host: localhost
+-- Generation Time: Apr 06, 2012 at 01:12 AM
+-- Server version: 5.1.36
+-- PHP Version: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `zend_invoices`
+-- Database: `zend_invoices`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `companies`
+-- Table structure for table `companies`
 --
 
 CREATE TABLE IF NOT EXISTS `companies` (
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `companies` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `countries`
+-- Table structure for table `countries`
 --
 
 CREATE TABLE IF NOT EXISTS `countries` (
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `countries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `countries`
+-- Dumping data for table `countries`
 --
 
 INSERT INTO `countries` (`iso1_code`, `name_caps`, `name`, `iso3_code`, `num_code`) VALUES
@@ -312,7 +312,7 @@ INSERT INTO `countries` (`iso1_code`, `name_caps`, `name`, `iso3_code`, `num_cod
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `currencies`
+-- Table structure for table `currencies`
 --
 
 CREATE TABLE IF NOT EXISTS `currencies` (
@@ -322,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `currencies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `currencies`
+-- Dumping data for table `currencies`
 --
 
 INSERT INTO `currencies` (`iso_code`, `name`) VALUES
@@ -485,7 +485,7 @@ INSERT INTO `currencies` (`iso_code`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `customers`
+-- Table structure for table `customers`
 --
 
 CREATE TABLE IF NOT EXISTS `customers` (
@@ -504,6 +504,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `email` tinytext,
   `payment_type` int(10) unsigned NOT NULL COMMENT 'Default payment type',
   `currency` char(3) NOT NULL COMMENT 'Default currency used by this customer',
+  `owing` decimal(16,4) NOT NULL DEFAULT '0.0000',
   PRIMARY KEY (`id`),
   KEY `country_code` (`country_code`),
   KEY `payment_type` (`payment_type`),
@@ -513,7 +514,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `payment_types`
+-- Table structure for table `payment_types`
 --
 
 CREATE TABLE IF NOT EXISTS `payment_types` (
@@ -525,7 +526,27 @@ CREATE TABLE IF NOT EXISTS `payment_types` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `taxes`
+-- Table structure for table `products`
+--
+
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) NOT NULL,
+  `last_cost` decimal(17,6) NOT NULL,
+  `average_cost` decimal(17,6) NOT NULL,
+  `unit_price` decimal(17,6) NOT NULL,
+  `tax_id` tinyint(10) unsigned NOT NULL,
+  `barcode` varchar(18) DEFAULT NULL COMMENT 'For desktop or PDA usage if available',
+  `created` datetime NOT NULL,
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `tax_id` (`tax_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `taxes`
 --
 
 CREATE TABLE IF NOT EXISTS `taxes` (
@@ -537,7 +558,7 @@ CREATE TABLE IF NOT EXISTS `taxes` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Volcado de datos para la tabla `taxes`
+-- Dumping data for table `taxes`
 --
 
 INSERT INTO `taxes` (`id`, `description`, `amount`, `amount_2`) VALUES
@@ -548,7 +569,7 @@ INSERT INTO `taxes` (`id`, `description`, `amount`, `amount_2`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -563,30 +584,36 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Volcado de datos para la tabla `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `salt`, `role`, `created`, `modified`) VALUES
 (1, 'demo', '72246e8e2f1a51d94f7e3cf41020ea76', 'ceb20772e0c9d240c75eb26b0e37abee', 'administrator', '2012-04-04 00:00:00', '2012-04-04 18:47:22');
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `companies`
+-- Constraints for table `companies`
 --
 ALTER TABLE `companies`
-  ADD CONSTRAINT `companies_ibfk_2` FOREIGN KEY (`currency`) REFERENCES `currencies` (`iso_code`),
-  ADD CONSTRAINT `companies_ibfk_1` FOREIGN KEY (`country_code`) REFERENCES `countries` (`iso1_code`);
+  ADD CONSTRAINT `companies_ibfk_1` FOREIGN KEY (`country_code`) REFERENCES `countries` (`iso1_code`),
+  ADD CONSTRAINT `companies_ibfk_2` FOREIGN KEY (`currency`) REFERENCES `currencies` (`iso_code`);
 
 --
--- Filtros para la tabla `customers`
+-- Constraints for table `customers`
 --
 ALTER TABLE `customers`
-  ADD CONSTRAINT `customers_ibfk_3` FOREIGN KEY (`currency`) REFERENCES `currencies` (`iso_code`),
   ADD CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`country_code`) REFERENCES `countries` (`iso1_code`),
-  ADD CONSTRAINT `customers_ibfk_2` FOREIGN KEY (`payment_type`) REFERENCES `payment_types` (`id`);
+  ADD CONSTRAINT `customers_ibfk_2` FOREIGN KEY (`payment_type`) REFERENCES `payment_types` (`id`),
+  ADD CONSTRAINT `customers_ibfk_3` FOREIGN KEY (`currency`) REFERENCES `currencies` (`iso_code`);
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`tax_id`) REFERENCES `taxes` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

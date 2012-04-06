@@ -22,12 +22,26 @@ body {padding:0;margin:0; font-family:helvetica; font-size:12px;}
 
 .table-header {font-weight:bold;}
 
+/* Special Links */
 a.add-link {text-decoration:none;padding-left:32px; background-image:url(../images/icons/bullet-add.png);background-repeat:no-repeat;background-position:left center;color:#464646;}
 a.add-link:hover {text-decoration:none;color:#0289b6;}
+a.link-invoices {text-decoration:none;padding-left:20px;background-image:url(../images/icons/invoice.png);background-repeat:no-repeat;background-position:left center;color:#464646;display:block;line-height:16px;white-space:nowrap;}
+a.link-invoices:hover {text-decoration:none;color:#0289b6;}
 
 .clearb {clear:both;}
+
+.no-border {border:none!important;}
+.trans-bg {background:transparent!important;}
 
 .bold {font-weight:bold;}
 
 /* Text alignment */
 .ta-right {text-align:right;}
+
+/* Table list */
+table.list {border-collapse:collapse;width:100%;}
+table.list thead th {background-image:url(../images/thead.png);}
+table.list th, table.list td {border:1px solid #DDD; padding-left:4px;padding-right:4px;height:32px;}
+table.list tbody tr:hover {background-color: #e7ecff;cursor:hand;cursor:pointer;}
+div.list-nav {text-align:center;font-size:12px; padding-top:8px;padding:bottom:8px;}
+div.list-nav a {text-decoration:none;}

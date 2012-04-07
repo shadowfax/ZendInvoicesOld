@@ -45,6 +45,15 @@ a.link-invoices:hover {text-decoration:none;color:#0289b6;}
 .ta-center {text-align:center;}
 .ta-right {text-align:right;}
 
+/* Paddings */
+.pad-bottom-8 {padding-bottom:8px; }
+.pad-right-24 { padding-right:24px; }
+
+/* DIV tables */
+div.table {display:table;}
+div.tr {display:table-row;}
+div.td {display:table-cell;}
+
 /* Table list */
 table.list {border-collapse:collapse;width:100%;}
 table.list thead th {background-image:url(../images/thead.png);}

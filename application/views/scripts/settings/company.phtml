@@ -1,58 +1,92 @@
-<table>
-	<tr>
-		<td class="bold ta-right">Company Name</td>
-		<td><input type="text" name="name" style="width:200px;" /></td>
-	</tr>
-	<tr>
-		<td class="bold ta-right">Vat Number</td>
-		<td><input type="text" name="vat_number" style="width:200px;" /></td>
-	</tr>
-	<tr>
-		<td class="bold ta-right">Address</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td class="bold ta-right">Country</td>
-		<td>
-			<select name="country_code">
-<?php foreach ($this->countries as $country) { ?>
-				<option value="<?php echo $country['iso1_code'] ?>"><?php echo $country['name']?></option>
-<?php } ?>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td class="bold ta-right">Default Currency</td>
-		<td>
-			<select name="currency">
-<?php foreach ($this->currencies as $currency) { ?>
-				<option value="<?php echo $currency['iso_code'] ?>"><?php echo $currency['name']?></option>
-<?php } ?>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td class="bold ta-right">Phone</td>
-		<td><input type="text" name="phone" style="width:200px;" />
-	</tr>
-	<tr>
-		<td class="bold ta-right">Mobile</td>
-		<td><input type="text" name="mobile" style="width:200px;" />
-	</tr>
-	<tr>
-		<td class="bold ta-right">Fax</td>
-		<td><input type="text" name="fax" style="width:200px;" />
-	</tr>
-	<tr>
-		<td class="bold ta-right">Email</td>
-		<td><input type="text" name="email" style="width:200px;" />
-	</tr>
-	<tr>
-		<td class="bold ta-right">Homepage</td>
-		<td><input type="text" name="homepage" style="width:200px;" />
-	</tr>
-	<tr>
-		<td class="bold ta-right">Logo</td>
-		<td><input type="text" name="logo" style="width:200px;" />
-	</tr>
-</table>
+<form method="post">
+	<input type="hidden" name="id" value="<?php if (isset($this->company)) echo $this->escape($this->company['id']); else echo 0; ?>" />
+	<div class="table">
+		<div class="tr pad-bottom-8">
+			<div class="td bold ta-right pad-bottom-8 pad-right-24">Company Name</div>
+			<div class="td pad-bottom-8"><input type="text" name="name" value="<?php if (isset($this->company)) echo $this->escape($this->company['name']); ?>" style="width:200px;" /></div>
+		</div>
+		<div class="tr pad-bottom-8">
+			<div class="td bold ta-right pad-bottom-8 pad-right-24">Vat Number</div>
+			<div class="td pad-bottom-8"><input type="text" name="vat_number" value="<?php if (isset($this->company)) echo $this->escape($this->company['vat_number']); ?>" style="width:200px;" /></div>
+		</div>
+		<div class="tr pad-bottom-8">
+			<div class="td bold ta-right pad-bottom-8 pad-right-24">Address</div>
+			<div class="td pad-bottom-8">
+				<div class="bottom-pad-10px">
+						<input type="text" name="street1" value="<?php if (isset($this->company)) echo $this->escape($this->company['street1']); ?>" style="width:320px;" /><br />
+						<span class="example">Street 1</span>
+					</div>
+					<div class="bottom-pad-10px">
+						<input type="text" name="street2" value="<?php if (isset($this->company)) echo $this->escape($this->company['street2']); ?>" style="width:320px;" /><br />
+						<span class="example">Street 2</span>
+					</div>
+					<div class="bottom-pad-10px">
+						<table>
+							<tr>
+								<td>
+									<input type="text" name="city" value="<?php if (isset($this->company)) echo $this->escape($this->company['city']); ?>" style="width:100px;" /><br />
+									<span class="example">City</span>
+								</td>
+								<td>
+									<input type="text" name="state" value="<?php if (isset($this->company)) echo $this->escape($this->company['state']); ?>" style="width:115px;" /><br />
+									<span class="example">State</span>
+								</td>
+								<td>
+									<input type="text" name="zip" value="<?php if (isset($this->company)) echo $this->escape($this->company['zip']); ?>" style="width:85px" /><br />
+									<span class="example">ZIP / Postal Code</span>
+								</td>
+							</tr>
+						</table>
+					</div>
+			</div>
+		</div>
+		<div class="tr">
+			<div class="td bold ta-right pad-bottom-8 pad-right-24">Country</div>
+			<div class="td pad-bottom-8">
+				<select name="country_code">
+	<?php foreach ($this->countries as $country) { ?>
+					<option value="<?php echo $this->escape($country['iso1_code']); ?>"><?php echo $this->escape($country['name']); ?></option>
+	<?php } ?>
+				</select>
+			</div>
+		</div>
+		<div class="tr">
+			<div class="td bold ta-right pad-bottom-8 pad-right-24">Default Currency</div>
+			<div class="td pad-bottom-8">
+				<select name="currency">
+	<?php foreach ($this->currencies as $currency) { ?>
+					<option value="<?php echo $this->escape($currency['iso_code']); ?>"><?php echo $this->escape($currency['name']); ?></option>
+	<?php } ?>
+				</select>
+			</div>
+		</div>
+		<div class="tr">
+			<div class="td bold ta-right pad-bottom-8 pad-right-24">Phone</div>
+			<div class="td pad-bottom-8"><input type="text" name="phone" value="<?php if (isset($this->company)) echo $this->escape($this->company['phone']); ?>" style="width:200px;" /></div>
+		</div>
+		<div class="tr">
+			<div class="td bold ta-right pad-bottom-8 pad-right-24">Mobile</div>
+			<div class="td pad-bottom-8"><input type="text" name="mobile" value="<?php if (isset($this->company)) echo $this->escape($this->company['mobile']); ?>" style="width:200px;" /></div>
+		</div>
+		<div class="tr">
+			<div class="td bold ta-right pad-bottom-8 pad-right-24">Fax</div>
+			<div class="td pad-bottom-8"><input type="text" name="fax" value="<?php if (isset($this->company)) echo $this->escape($this->company['fax']); ?>" style="width:200px;" /></div>
+		</div>
+		<div class="tr">
+			<div class="td bold ta-right pad-bottom-8 pad-right-24">Email</div>
+			<div class="td pad-bottom-8"><input type="text" name="email" value="<?php if (isset($this->company)) echo $this->escape($this->company['email']); ?>" style="width:200px;" /></div>
+		</div>
+		<div class="tr">
+			<div class="td bold ta-right pad-bottom-8 pad-right-24">Homepage</div>
+			<div class="td pad-bottom-8"><input type="text" name="homepage" value="<?php if (isset($this->company)) echo $this->escape($this->company['homepage']); ?>" style="width:200px;" /></div>
+		</div>
+		<div class="tr">
+			<div class="td bold ta-right pad-bottom-8 pad-right-24">Logo</div>
+			<div class="td pad-bottom-8"><input type="text" name="logo" style="width:200px;" /></div>
+		</div>
+		<div class="tr">
+			<div class="td bold ta-right pad-bottom-8 pad-right-24"></div>
+			<div class="td pad-bottom-8"><input type="submit" name="submit" class="gradient button-green" style="min-width:120px;" value="Save" /></div>
+		</div>
+	</div>
+</form>
